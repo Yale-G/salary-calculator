@@ -1,0 +1,69 @@
+<div class="salary-calculation">
+    <h2>Υπολογισμός Μισθού</h2>
+
+    <div>
+        <label for="grossSalary">Μικτός Μισθός (€):</label>
+        <input type="number" id="grossSalary" [(ngModel)]="grossSalary">
+    </div>
+
+    <div>
+        <label for="nightShiftHours">Ώρες Νυχτερινής Εργασίας:</label>
+        <input type="number" id="nightShiftHours" [(ngModel)]="nightShiftHours">
+    </div>
+
+    <div>
+        <label for="sundayHolidayHours">Ώρες Εργασίας σε Κυριακές ή Αργίες:</label>
+        <input type="number" id="sundayHolidayHours" [(ngModel)]="sundayHolidayHours">
+    </div>
+
+    <div>
+        <label for="sundayNightHours">Ώρες Εργασίας σε Κυριακή Βράδυ (22:00-24:00):</label>
+        <input type="number" id="sundayNightHours" [(ngModel)]="sundayNightHours">
+    </div>
+
+    <div>
+        <label for="insuranceRate">Ποσοστό Ασφαλιστικών Εισφορών (%):</label>
+        <input type="number" id="insuranceRate" [(ngModel)]="insuranceRate">
+    </div>
+
+    <div>
+        <label for="taxRate">Ποσοστό Φόρου Εισοδήματος (%):</label>
+        <input type="number" id="taxRate" [(ngModel)]="taxRate">
+    </div>
+
+    <div>
+        <label for="solidarityRate">Ποσοστό Εισφοράς Αλληλεγγύης (%):</label>
+        <input type="number" id="solidarityRate" [(ngModel)]="solidarityRate">
+    </div>
+
+    <button (click)="calculateSalary()">Υπολογισμός</button>
+
+    <div *ngIf="calculatedSalary" class="calculated-result">
+        <h3>Αποτελέσματα:</h3>
+        <p><strong>Μικτός Μισθός:</strong> {{ grossSalary }} €</p>
+        <p><strong>Καθαρός Μισθός:</strong> {{ calculatedSalary.netSalary }} €</p>
+        <p><strong>Προσαύξηση Νυχτερινής Εργασίας:</strong> {{ calculatedSalary.nightShiftBonus }} €</p>
+        <p><strong>Προσαύξηση Κυριακής/Αργίας:</strong> {{ calculatedSalary.sundayHolidayBonus }} €</p>
+        <p><strong>Προσαύξηση Κυριακής Βράδυ:</strong> {{ calculatedSalary.sundayNightBonus }} €</p>
+    </div>
+
+    <button class="hint-btn" (click)="toggleHintBox()"><i class="fas fa-question-circle"></i>Βοήθεια</button>
+
+    <!-- Hint Box -->
+    <div *ngIf="showHint" class="hint-box">
+        <h4>Πως Γίνονται οι Υπολογισμοί:</h4>
+        <p>
+            Οι υπολογισμοί βασίζονται σε μέσους όρους για τις ασφαλιστικές εισφορές, τους φόρους και τις προσαυξήσεις
+            για τις νυχτερινές ώρες, Κυριακές και Αργίες.
+            <br>
+            - Προσαύξηση νυχτερινής εργασίας: 25% πάνω από το ωρομίσθιο.
+            <br>
+            - Προσαύξηση Κυριακής/Αργίας: 75% πάνω από το ωρομίσθιο.
+            <br>
+            - Προσαύξηση Κυριακής βράδυ (22:00-24:00): Υπολογίζεται και για νυχτερινή εργασία και για εργασία Κυριακής.
+        </p>
+        <p><strong>Disclaimer:</strong> Οι υπολογισμοί αυτοί δεν αντλούν δεδομένα από επίσημες κρατικές πηγές και δεν
+            εγγυώνται πλήρη ακρίβεια. Παρακαλούμε να ελέγξετε τις τρέχουσες νομοθεσίες πριν προχωρήσετε σε οποιονδήποτε
+            υπολογισμό ή ενέργεια.</p>
+    </div>
+</div>
